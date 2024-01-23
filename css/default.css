@@ -112,7 +112,7 @@ article .header {
 
 @media (min-width: 640px) {
   body {
-    width: 60rem;
+    width: 80rem;
     margin: 0 auto;
     padding: 0;
   }
@@ -139,4 +139,12 @@ article .header {
     float: left;
     font-size: 1.8rem;
   }
+}
+
+.profile_pic {
+    width: 70%;
+    height: auto;
+    border-radius: 20%;
+    margin-left: 15%;
+    margin-right: 15%;
 }
