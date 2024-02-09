@@ -16,7 +16,4 @@ author:
   name:           'Nicolas Audinet de Pieuchon'
   url:            https://www.linkedin.com/in/nicolas-audinet/
 
-plugins: [jekyll-paginate]
-
-paginate:         10
-paginate_path: "/_posts/page:num"
+plugins: []
