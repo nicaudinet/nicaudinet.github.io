@@ -10,7 +10,7 @@ title:            Nicolas Audinet de Pieuchon
 # tagline:          'A Jekyll theme'
 description:      'Causality, NLP, Haskell'
 url:              http://nicaudinet.github.io
-baseurl:          /
+baseurl:          https://nicaudinet.github.io/
 
 author:
   name:           'Nicolas Audinet de Pieuchon'

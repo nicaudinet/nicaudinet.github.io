@@ -224,7 +224,7 @@ a.sidebar-nav-item:focus {
 }
 
 .theme-base-08 .content a,
-.theme-base-08 .related-posts li a:hover {
+.theme-base-08 li a:hover {
     color: #ac4142;
 }
 
@@ -234,7 +234,7 @@ a.sidebar-nav-item:focus {
 }
 
 .theme-base-09 .content a,
-.theme-base-09 .related-posts li a:hover {
+.theme-base-09 li a:hover {
     color: #d28445;
 }
 
@@ -244,7 +244,7 @@ a.sidebar-nav-item:focus {
 }
 
 .theme-base-0a .content a,
-.theme-base-0a .related-posts li a:hover {
+.theme-base-0a li a:hover {
     color: #f4bf75;
 }
 
@@ -254,7 +254,7 @@ a.sidebar-nav-item:focus {
 }
 
 .theme-base-0b .content a,
-.theme-base-0b .related-posts li a:hover {
+.theme-base-0b li a:hover {
     color: #90a959;
 }
 
@@ -264,7 +264,7 @@ a.sidebar-nav-item:focus {
 }
 
 .theme-base-0c .content a,
-.theme-base-0c .related-posts li a:hover {
+.theme-base-0c li a:hover {
     color: #75b5aa;
 }
 
@@ -274,7 +274,7 @@ a.sidebar-nav-item:focus {
 }
 
 .theme-base-0d .content a,
-.theme-base-0d .related-posts li a:hover {
+.theme-base-0d li a:hover {
     color: #6a9fb5;
 }
 
@@ -284,7 +284,7 @@ a.sidebar-nav-item:focus {
 }
 
 .theme-base-0e .content a,
-.theme-base-0e .related-posts li a:hover {
+.theme-base-0e li a:hover {
     color: #aa759f;
 }
 
@@ -294,6 +294,6 @@ a.sidebar-nav-item:focus {
 }
 
 .theme-base-0f .content a,
-.theme-base-0f .related-posts li a:hover {
+.theme-base-0f li a:hover {
     color: #8f5536;
 }
