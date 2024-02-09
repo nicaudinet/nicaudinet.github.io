@@ -1,19 +1,22 @@
 ---
 layout: page
-title: About
+title: Home
 ---
 
 # Nicolas Audinet de Pieuchon
+
+Hi!
 
 I am a French/Italian computer scientist. I grew up in Rome, Italy, and have
 since lived in Wales, England, Finland and Sweden.
 
 Currently I am a PhD student at [Chalmers University of
 Technology](https://www.chalmers.se/en/) where I am part of the
-[NLP@DSAI](https://dsai-nlp.github.io/) group. I am interested in developing and
-applying methods that make use of text data for more accurate and robust
-estimates of causal effects in the social sciences. My research lies at the
-intersection of causality and natural language processing.
+[NLP@DSAI](https://dsai-nlp.github.io/) group. My
+[research](https://www.cse.chalmers.se/~richajo/projects/wasphs2023.html)
+involves developing and applying methods that make use of text data for more
+accurate and robust estimates of causal effects in the social sciences. My
+research lies at the intersection of causality and natural language processing.
 
 Previously, I worked as a software engineer at [Relex
 Solutions](https://www.relexsolutions.com/) where I helped develop an internal
@@ -38,7 +41,7 @@ Some topics I am generally interested in:
 I also love to read, code, sing, dance and lift weights!
 
 <a href="{{ site.baseurl }}public/CV.pdf">
-    Link to my CV.
+    Link to my CV (pdf).
 </a>
 
 ---

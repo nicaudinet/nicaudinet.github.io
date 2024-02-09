@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Typesafe matrix reshape with Hmatrix
+title: Typesafe reshape with Hmatrix
 ---
 
 The goal of this post is to show how to implement a type-safe `reshape` function

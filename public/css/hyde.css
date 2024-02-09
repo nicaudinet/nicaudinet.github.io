@@ -19,7 +19,6 @@
  * Global resets
  * Sidebar
  * Container
- * Home page
  * Reverse layout
  * Themes
  */
@@ -141,6 +140,42 @@ a.sidebar-nav-item:focus {
     }
 }
 
+/* Topbar
+*
+* Top bar navigation for blog posts
+*/
+
+.topbar-nav {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-evenly;
+    list-style-type: none;
+    background-color: #202020;
+    color: rgba(255, 255, 255, .5);
+}
+
+.topbar-nav-item {
+    display: block;
+    line-height: 1.75;
+    font-size: 1.5rem;
+}
+
+.topbar-nav-item a {
+    color: #fff;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+a.topbar-nav-item:hover,
+a.topbar-nav-item:focus {
+    text-decoration: underline;
+}
+
+.topbar-padding {
+    padding-top: 3rem;
+}
+
 
 /* Container
  *
@@ -168,19 +203,6 @@ a.sidebar-nav-item:focus {
     }
 }
 
-/*
- * Home page
- *
- * Vertically center the welcome message
- */
-
-.home {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 80vh;
-}
 
 /*
  * Reverse layout
@@ -224,7 +246,7 @@ a.sidebar-nav-item:focus {
 }
 
 .theme-base-08 .content a,
-.theme-base-08 li a:hover {
+.theme-base-08 .related-posts li a:hover {
     color: #ac4142;
 }
 
@@ -234,7 +256,7 @@ a.sidebar-nav-item:focus {
 }
 
 .theme-base-09 .content a,
-.theme-base-09 li a:hover {
+.theme-base-09 .related-posts li a:hover {
     color: #d28445;
 }
 
@@ -244,7 +266,7 @@ a.sidebar-nav-item:focus {
 }
 
 .theme-base-0a .content a,
-.theme-base-0a li a:hover {
+.theme-base-0a .related-posts li a:hover {
     color: #f4bf75;
 }
 
@@ -254,7 +276,7 @@ a.sidebar-nav-item:focus {
 }
 
 .theme-base-0b .content a,
-.theme-base-0b li a:hover {
+.theme-base-0b .related-posts li a:hover {
     color: #90a959;
 }
 
@@ -264,7 +286,7 @@ a.sidebar-nav-item:focus {
 }
 
 .theme-base-0c .content a,
-.theme-base-0c li a:hover {
+.theme-base-0c .related-posts li a:hover {
     color: #75b5aa;
 }
 
@@ -274,7 +296,7 @@ a.sidebar-nav-item:focus {
 }
 
 .theme-base-0d .content a,
-.theme-base-0d li a:hover {
+.theme-base-0d .related-posts li a:hover {
     color: #6a9fb5;
 }
 
@@ -284,7 +306,7 @@ a.sidebar-nav-item:focus {
 }
 
 .theme-base-0e .content a,
-.theme-base-0e li a:hover {
+.theme-base-0e .related-posts li a:hover {
     color: #aa759f;
 }
 
@@ -294,6 +316,6 @@ a.sidebar-nav-item:focus {
 }
 
 .theme-base-0f .content a,
-.theme-base-0f li a:hover {
+.theme-base-0f .related-posts li a:hover {
     color: #8f5536;
 }
