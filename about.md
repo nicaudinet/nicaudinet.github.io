@@ -3,28 +3,48 @@ layout: page
 title: About
 ---
 
-<p class="message">
-  Hey there! This page is included as an example. Feel free to customize it for your own use upon downloading. Carry on!
-</p>
+# Nicolas Audinet de Pieuchon
 
-In the novel, *The Strange Case of Dr. Jeykll and Mr. Hyde*, Mr. Poole is Dr. Jekyll's virtuous and loyal butler. Similarly, Poole is an upstanding and effective butler that helps you build Jekyll themes. It's made by [@mdo](https://twitter.com/mdo).
+I am a French/Italian computer scientist. I grew up in Rome, Italy, and have
+since lived in Wales, England, Finland and Sweden.
 
-There are currently two themes built on Poole:
+Currently I am a PhD student at [Chalmers University of
+Technology](https://www.chalmers.se/en/) where I am part of the
+[NLP@DSAI](https://dsai-nlp.github.io/) group. I am interested in developing and
+applying methods that make use of text data for more accurate and robust
+estimates of causal effects in the social sciences. My research lies at the
+intersection of causality and natural language processing.
 
-* [Hyde](http://hyde.getpoole.com)
-* [Lanyon](http://lanyon.getpoole.com)
+Previously, I worked as a software engineer at [Relex
+Solutions](https://www.relexsolutions.com/) where I helped develop an internal
+tool to manage the installation and customization. I primarily worked with
+Haskell, Nix and Linux. Functional programming is my favorite programming
+paradigm.
 
-Learn more and contribute on [GitHub](https://github.com/poole).
+I did my bachelor and master and masters at the [University of
+Bristol](https://www.bristol.ac.uk/) in Computer Science and Electronics. I also
+completed a second masters at Chalmers in [Complex Adaptive
+Systems](https://www.chalmers.se/en/education/find-masters-programme/complex-adaptive-systems-msc/).
 
-## Setup
+I attended [UWC Atlantic College](https://www.uwcatlantic.org/) from 2012 to
+2014.
 
-Some fun facts about the setup of this project include:
+Some topics I am generally interested in:
+- Causality and causal inference
+- Machine learning
+- Complex systems
+- Functional programming
 
-* Built for [Jekyll](http://jekyllrb.com)
-* Developed on GitHub and hosted for free on [GitHub Pages](https://pages.github.com)
-* Coded with [Sublime Text 2](http://sublimetext.com), an amazing code editor
-* Designed and developed while listening to music like [Blood Bros Trilogy](https://soundcloud.com/maddecent/sets/blood-bros-series)
+I also love to read, code, sing, dance and lift weights!
 
-Have questions or suggestions? Feel free to [open an issue on GitHub](https://github.com/poole/issues/new) or [ask me on Twitter](https://twitter.com/mdo).
+<a href="{{ site.baseurl }}public/CV.pdf">
+    Link to my CV.
+</a>
 
-Thanks for reading!
+---
+
+## Contact Info
+
+- Email: [nicolas.audinet@chalmers.se](mailto:nicolas.audinet@chalmers.se)
+- [LinkedIn](https://www.linkedin.com/in/nicolas-audinet/)
+- [Github](https://github.com/nicaudinet)

@@ -1,8 +1,10 @@
 <div class="sidebar">
-    <div class="container sidebar-sticky">
+
+    <div class="sidebar-container sidebar-sticky">
+
         <div class="sidebar-about">
             <a href="{{ site.baseurl }}">
-                <img src="/public/profile_pic.png" alt="Profile Pic" class="sidebar-avatar">
+                <img src="{{ site.baseurl }}public/profile_pic.png" alt="Profile Pic" class="sidebar-avatar">
             </a>
             <h2>
                 <a href="{{ site.baseurl }}">
@@ -33,6 +35,6 @@
 
         </nav>
 
-        <p>&copy; {{ site.time | date: '%Y' }}. All rights reserved.</p>
+        <p class="sidebar-footer">&copy; {{ site.time | date: '%Y' }}. All rights reserved.</p>
     </div>
 </div>
