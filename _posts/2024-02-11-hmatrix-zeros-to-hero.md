@@ -344,7 +344,7 @@ import GHC.TypeLits (KnownNat)
 import Numeric.LinearAlgebra.Static
 
 constZero :: Double -> Double -> Double
-constZero = const (const 0)
+constZero _ _ = 0
 
 zeros :: (KnownNat n, KnownNat m) => L n m
 zeros = build constZero
