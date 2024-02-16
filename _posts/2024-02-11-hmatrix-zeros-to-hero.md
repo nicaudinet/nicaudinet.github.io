@@ -197,7 +197,7 @@ zeros :: forall n m. L n m
 zeros =
   let n_val = fromIntegral (natVal @n Proxy)
       m_val = fromIntegral (natVal @m Proxy)
-   in matrix (replicate (n * m) 0)
+   in matrix (replicate (n_val * m_val) 0)
 ```
 
 Now we get another scary-looking set of compiler errors:
@@ -272,7 +272,7 @@ zeros :: forall n m. (KnownNat n, KnownNat m) => L n m
 zeros =
   let n_val = fromIntegral (natVal @n Proxy)
       m_val = fromIntegral (natVal @m Proxy)
-   in matrix (replicate (n * m) 0)
+   in matrix (replicate (n_val * m_val) 0)
 ```
 
 And voilá! We have implemented a type-safe function to create constant matrices
@@ -292,7 +292,7 @@ zeros :: forall n m. (KnownNat m, KnownNat n) => L n m
 zeros =
   let n_val = fromIntegral (natVal @n Proxy)
       m_val = fromIntegral (natVal @m Proxy)
-   in matrix (replicate (n * m) 0)
+   in matrix (replicate (n_val * m_val) 0)
 
 main :: IO ()
 main = print (zeros @3 @2)
