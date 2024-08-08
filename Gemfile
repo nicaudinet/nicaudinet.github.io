@@ -1,8 +1,8 @@
 source "https://rubygems.org"
 
-gem "jekyll"
+gem "jekyll", "~> 4.3.3"
 
-gem "csv", "~> 3.2"
+gem "csv", "~> 3.3"
 
 gem "base64", "~> 0.2.0"
 
