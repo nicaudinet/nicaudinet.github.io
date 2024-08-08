@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Reshape in Hmatrix
+excerpt: A post where I explain and implement a type-safe matrix reshape function with the Hmatrix Static API
 ---
 
 The goal of this post is to implement a type-safe `reshape` function using the

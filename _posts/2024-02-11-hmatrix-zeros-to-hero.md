@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Hmatrix - from zeros to hero
+excerpt: A post where I implement a type-safe `zeros` function, along with a brief introduction to the Hmatrix Static API
 ---
 
 The goal of this post is to give a brief introduction to `hmatrix`'s Static API

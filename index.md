@@ -1,9 +1,17 @@
 ---
 layout: page
-title: Home
+title: About
 ---
 
-# Nicolas Audinet de Pieuchon
+<h1 class="about-title">
+    Nicolas Audinet de Pieuchon
+</h1>
+
+<p class="about-email">
+    nicolas.audinet@chalmers.se
+</p>
+
+
 
 Hi!
 
@@ -32,7 +40,7 @@ Systems](https://www.chalmers.se/en/education/find-masters-programme/complex-ada
 I attended [UWC Atlantic College](https://www.uwcatlantic.org/) from 2012 to
 2014.
 
-Some topics I am generally interested in:
+Topics I am interested in:
 - Causality and causal inference
 - Machine learning
 - Complex systems
@@ -40,14 +48,10 @@ Some topics I am generally interested in:
 
 I also love to read, code, sing, dance and lift weights.
 
-<a href="{{ site.baseurl }}public/CV.pdf">
-    Link to my CV (pdf).
-</a>
-
 ---
 
 ## Contact Info
 
-- Email: [nicolas.audinet@chalmers.se](mailto:nicolas.audinet@chalmers.se)
+- [Official CV (pdf)]({{ site.baseurl }}public/CV.pdf)
 - [LinkedIn](https://www.linkedin.com/in/nicolas-audinet/)
 - [Github](https://github.com/nicaudinet)
