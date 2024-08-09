@@ -12,6 +12,7 @@
     --sidebar-width: 25rem;
     --max-width: 40rem;
     --sidebar-color: #306b40;
+    --main-font-size: 20px;
 }
 
 
@@ -23,7 +24,7 @@
 
 html {
     font-family: "PT Sans", Helvetica, Arial, sans-serif;
-    font-size: 23px;
+    font-size: var(--main-font-size);
     line-height: 1.5;
 }
 
