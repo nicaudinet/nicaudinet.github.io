@@ -1,14 +1,18 @@
 <div class="sidebar">
 
     <!-- About section with name and profile pic -->
-    <div class="sidebar-about">
+    <div>
+
         <img src="{{ site.baseurl }}public/images/profile_pic.png" alt="Profile Pic" class="sidebar-avatar">
-        <h1 class="sidebar-about-name">
+
+        <h1 class="sidebar-name">
             Nicolas Audinet de Pieuchon
         </h1>
-        <p class="sidebar-about-description">
+
+        <p class="sidebar-description">
             Causality, NLP, Haskell
         </p>
+
     </div>
 
     <!-- Navigation to various pages -->
@@ -22,6 +26,19 @@
             {% endif %}
         {% endfor %}
     </nav>
+
+    <!-- Icons for links -->
+    <div>
+        <a href="https://github.com/nicaudinet/">
+            <img src="{{ site.baseurl }}public/images/github.svg" class="sidebar-icon">
+        </a>
+        <a href="https://scholar.google.com/citations?hl=en&user=jMc1xWAAAAAJ">
+            <img src="{{ site.baseurl }}public/images/google-scholar.svg" class="sidebar-icon">
+        </a>
+        <a href="https://www.linkedin.com/in/nicolas-audinet/">
+            <img src="{{ site.baseurl }}public/images/linkedin.svg" class="sidebar-icon">
+        </a>
+    </div>
 
     <!-- Footer with copyright -->
     <p class="sidebar-footer">

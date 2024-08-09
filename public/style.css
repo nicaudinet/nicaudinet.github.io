@@ -10,9 +10,10 @@
 /* Global variable definitions */
 :root {
     --sidebar-width: 25rem;
-    --max-width: 40rem;
+    --max-text-width: 40rem;
     --sidebar-color: #306b40;
     --main-font-size: 20px;
+    --sidebar-icon-size: 2rem;
 }
 
 
@@ -133,8 +134,8 @@ pre code {
     padding-top: 4rem;
     padding-bottom: 4rem;
     /* margin */
-    margin-left: calc(var(--sidebar-width) + (100% - var(--sidebar-width) - var(--max-width)) / 2);
-    max-width: var(--max-width);
+    margin-left: calc(var(--sidebar-width) + (100% - var(--sidebar-width) - var(--max-text-width)) / 2);
+    max-width: var(--max-text-width);
 }
 
 .about-title {
@@ -153,7 +154,7 @@ pre code {
 /* Posts (any blog post with the top bar) */
 
 .post {
-    max-width: var(--max-width);
+    max-width: var(--max-text-width);
     padding-left: 1rem;
     padding-right: 1rem;
     margin-left: auto;
@@ -177,7 +178,6 @@ pre code {
     color: #9a9a9a;
     font-size: 1.25rem;
 }
-
 
 
 /* Sidebar */
@@ -211,23 +211,30 @@ pre code {
     border-radius: 5%;
 }
 
-.sidebar-about-name {
+.sidebar-name {
     color: #fff;
-    margin-top: 1em;
-    font-size: 2rem;
-    font-weight: normal;
+    margin-top: 1rem;
+    font-size: 1.75rem;
+    font-weight: bold;
 }
 
-.sidebar-about-description {
+.sidebar-icon {
+    max-width: var(--sidebar-icon-size);
+    max-height: var(--sidebar-icon-size);
+    margin-left: .5rem;
+    margin-right: .5rem;
+}
+
+.sidebar-description {
     color: rgba(255, 255, 255, 0.5);
     margin-top: 0;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
 }
 
 .sidebar-nav-item {
     display: block;
     line-height: 1.5;
-    font-size: 2rem;
+    font-size: 1.75rem;
     color: #fff;
 }
 
