@@ -11,7 +11,7 @@
 :root {
     --sidebar-width: 25rem;
     --max-text-width: 40rem;
-    --sidebar-color: #306b40;
+    --sidebar-color: #306b40; /* A dark, reddish green */
     --main-font-size: 20px;
     --sidebar-icon-size: 2rem;
 }
@@ -56,7 +56,7 @@ h1, h2 {
     margin-bottom: .5rem;
     font-weight: bold;
     line-height: 1.25;
-    color: #313131;
+    color: var(--sidebar-color);
     text-rendering: optimizeLegibility;
 }
 
@@ -263,8 +263,8 @@ a.sidebar-nav-item:hover, a.sidebar-nav-item:focus {
     display: flex;
     justify-content: space-evenly;
     list-style-type: none;
-    background-color: #202020;
-    color: rgba(255, 255, 255, .5);
+    background-color: var(--sidebar-color);
+    color: #fff;
 }
 
 .topbar-nav-item {
