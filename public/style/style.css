@@ -7,6 +7,10 @@
  * - Top bar (for blog posts)
  */
 
+/* Import code highlighting css */
+/* https://jwarby.github.io/jekyll-pygments-themes/languages/ruby.html */
+@import "syntax-highlighting.css";
+
 /* Global variable definitions */
 :root {
     --sidebar-width: 25rem;
