@@ -47,7 +47,7 @@ in Hmatrix, although they are limited to single-row matrices:
 
 What doesn't exist yet in Hmatrix is a `reshape` function which transforms a
 matrix into another matrix of a different shape. More specifically, there isn't
-a function that takes a matrix `L n m` and tranfroms it into another matrix `L p
+a function that takes a matrix `L n m` and transforms it into another matrix `L p
 q` where `n * m = p * q`. So let's make it!
 
 Our strategy for implementing `reshape` will be to first implement two other
@@ -71,19 +71,19 @@ this:
 
 ![flatten.svg]({{ site.baseurl }}public/reshape-in-hmatrix/flatten.svg){:width="80%" style="display:block; margin-left:auto; margin-right:auto"}
 
-and unflattening the array into a 3x3 matrix row-wise looks like this:
+And unflattening the array into a 3x3 matrix row-wise looks like this:
 
 ![unflatten.svg]({{ site.baseurl }}public/reshape-in-hmatrix/unflatten.svg){:width="80%" style="display:block; margin-left:auto; margin-right:auto"}
 
 # The `flatten` function
 
 The `flatten` function can be thought of as a fold which recursively takes the
-top row of the matrix and concatentates it in front of the flattened version of
-the rest of the matrix. The recursion stops when we encounter a matrix with a
+top row of the matrix and concatenates it to the front of the flattened version
+of the rest of the matrix. The recursion stops when we encounter a matrix with a
 single row, in which case we can just use the `unrow` function from before. We
 can use `natVal` and `Proxy` to inspect the size of the matrix at the value
 level to decide whether to stop the recursion, and `splitRows` and `(#)` from
-the Static API to split the matrix and concatenate vectors, respsectively.
+the Static API to split the matrix and concatenate vectors, respectively.
 Bringing all of this together gives us our first implementation:
 
 ```haskell
@@ -178,10 +178,10 @@ randomly choose one of them). One way to get around this is to use the [{-#
 OVERLAPS
 #-}](https://downloads.haskell.org/ghc/latest/docs/users_guide/exts/pragmas.html#pragma-OVERLAPPABLE)
 pragma. This tells the compiler that, in the case where both instances match, it
-can ignore the second instance in favor of the first one.
+can ignore the second instance in favour of the first one.
 
 Implementing the instance for single-row matrices is straightforward: it just
-becomes a call to `unrow`. Implementing the instance for multi-row matrcies is a
+becomes a call to `unrow`. Implementing the instance for multi-row matrices is a
 bit trickier however. Our strategy will be the same as before: we will flatten
 the matrix by recursively taking the top row and concatenating it to the
 flattened version of the rest of the matrix. Here's our second attempt:
@@ -330,7 +330,7 @@ Here, the compiler is saying that it doesn't know that `m2 :: L (n-1) m` will
 match an instance of `Flattenable` since it might have more than one row. The
 fix is to add a constraint for `Flattenable (n-1) m`. Adding this constraint
 also means that we can remove the `{-# OVERLAPS #=}` pragma since the instance
-won't match with single-row matrices anymore.
+won't match with single-row matrices any more.
 
 After adding the new constraints, our instance now looks like this:
 
@@ -420,7 +420,7 @@ instance Flattenable 1 m where
   unflatten = row
 ```
 
-Also like before, the instance for multi-row matrices is more compliced and
+Also like before, the instance for multi-row matrices is more complicated and
 involves recursively calling the `unflatten` function. The body of the function
 will look as follows, where `split` and `(===)` are functions to split vectors
 and stack matrices, respectively:
@@ -431,7 +431,7 @@ unflatten vec =
      in row r === unflatten rest
 ```
 
-We will also need to provide several more contraints to the instance. These were
+We will also need to provide several more constraints to the instance. These were
 implemented following the same process as for `flatten`: compile, get an error,
 add a constraint to fix the error, repeat.
 
