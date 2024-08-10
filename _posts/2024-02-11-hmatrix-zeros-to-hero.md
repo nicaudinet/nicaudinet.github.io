@@ -43,7 +43,7 @@ which gives the following output:
 
 The benefit of storing the size at the type level is that **the compiler can use
 the information to prevent impossible operations at compile time**. For example,
-trying to compile this program (where `(<>)` is matrix multiplication):
+trying to compile this program (where `(<>)` is matrix multiplication)
 
 ```haskell
 main :: IO ()
