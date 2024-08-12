@@ -222,6 +222,10 @@ pre code {
     font-weight: bold;
 }
 
+.sidebar-icons a {
+    text-decoration: none;
+}
+
 .sidebar-icon {
     max-width: var(--sidebar-icon-size);
     max-height: var(--sidebar-icon-size);
