@@ -49,10 +49,4 @@ Topics I am interested in:
 
 I also love to read, code, sing, dance and lift weights.
 
----
-
-## Contact Info
-
-- [Official CV (pdf)]({{ site.baseurl }}public/CV.pdf)
-- [LinkedIn](https://www.linkedin.com/in/nicolas-audinet/)
-- [Github](https://github.com/nicaudinet)
+[Curriculum Vitae (pdf)]({{ site.baseurl }}public/CV.pdf)
