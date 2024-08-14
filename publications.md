@@ -10,7 +10,8 @@ order: 3
 
 - [Can Large Language Models (or Humans) Disentangle Text?](https://aclanthology.org/2024.nlpcss-1.5/)  
 Nicolas Audinet de Pieuchon, Adel Daoud, Connor Jerzak, Moa Johansson, Richard Johansson  
-NLP+CSS Workshop at NAACL 2024
+NLP+CSS Workshop at NAACL 2024  
+[ [poster] ]({{ site.baseurl }}public/posters/can-llms-disentangle-text.pdf)
 
 ## 2023
 
