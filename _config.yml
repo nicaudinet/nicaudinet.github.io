@@ -9,8 +9,8 @@ permalink:        pretty
 title:            Nicolas Audinet de Pieuchon
 url:              http://nicaudinet.github.io
 
-# baseurl:          https://nicaudinet.github.io/
-baseurl:          /
+baseurl:          https://nicaudinet.github.io/
+# baseurl:          /
 
 author:
   name:           'Nicolas Audinet de Pieuchon'
