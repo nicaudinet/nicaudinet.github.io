@@ -372,50 +372,73 @@ gameOver = all validBottle . M.elems
 # Creating puzzles
 
 Now that we have a working game, we need a way to generate new puzzles so that
-users can play the game to their heart's content.
-
-If we have enough empty bottles, the problem is always solvable.
-
-[Paper](https://arxiv.org/pdf/2202.09495) with bounds for when the puzzle is
-solvable or not. 
-
-Set the heights of the bottles to 4 and the number of empty bottles to 2.
-
-Not all configurations are solvable for enough colours, but many are. So our
-strategy is:
-
-1. Randomly generate a configuration
-2. Try to solve it
-3. Check if the solution is solvable
-    - If it is solvable, return the configuration
-    - If it's not solvable, repeat the whole process
+users can play the game to their heart's content. To help learn the game, I also
+decided to support three puzzle sizes:
 
 ```haskell
 data PuzzleSize = Small | Medium | Large
+```
 
-shuffle :: MonadRandom m => [a] -> m [a]
-shuffle xs = do
-  idxs <- replicateM (length xs) getRandom
-  pure (map fst (sortBy (comparing snd) (zip xs (idxs :: [Int]))))
+Given a puzzle size, the next thing to do is to figure out which (and how many)
+colours to use in the puzzle. I arbitrarily decided to use 4, 7, and 10 colours
+for the small, medium, and large puzzles respectively, and used `toEnum` from
+the
+[Enum](https://hackage.haskell.org/package/base-4.20.0.1/docs/Prelude.html#t:Enum)
+class to make the list of colours of the appropriate size:
 
-chunksOf :: Int -> [a] -> [[a]]
-chunksOf n xs
-  | null xs = []
-  | length xs < n = [xs]
-  | otherwise = take n xs : chunksOf n (drop n xs)
+```haskell
+colorPalette :: PuzzleSize -> [Color]
+colorPalette Small = map toEnum [0 .. 3]
+colorPalette Medium = map toEnum [0 .. 6]
+colorPalette Large = map toEnum [0 .. 9]
+```
 
-randomBottles :: MonadRandom m => Int -> m Bottles
-randomBottles n = do
-  let initColors = concat $ replicate 4 $ map toEnum [0..n-1]
+The puzzles start with the same number of full bottles as the number of colours.
+Mirroring the version of the game I've been playing, I also decided to use
+bottles of height 4, and to add two extra empty bottles at the start. To make a
+new puzzle, I therefore:
+
+1. Make a list with 4 copies of each colour
+2. Shuffle it
+3. Split it into a list of bottles of height 4
+4. Add two empty bottles
+5. Convert the list into a `Map`
+
+In code it looks like this:
+
+```haskell
+randomBottles :: MonadRandom m => PuzzleSize -> m Bottles
+randomBottles size = do
+  let initColors = concat (replicate 4 (colorPalette size))
   randomColors <- shuffle initColors
   let bottles = chunksOf 4 randomColors <> [[], []]
-  pure (M.fromList $ zip [0..] bottles)
+  pure (M.fromList $ zip [0 ..] bottles)
+```
 
-sizeToInt :: PuzzleSize -> Int
-sizeToInt Small = 4
-sizeToInt Medium = 7
-sizeToInt Large = 10
+I used two helper functions here:
 
+- `shuffle :: MonadRandom m => [a] -> m [a]` which takes a list and returns a
+random permutation of it [1]
+- `chunksOf :: Int -> [a] -> [[a]]` which takes a list and breaks it up into
+chunks of a specified length
+
+But, you might ask: how do we know that the puzzle is actually solvable? Turns
+out that some mathematicians actually [studied this
+problem](https://arxiv.org/pdf/2202.09495) and found some bounds for the minimum
+number of empty bottles needed to ensure the puzzle is always solvable. Plugging
+in our parameters, two empty bottles seems to be the exact lower bound for all
+three puzzle sizes ... interesting! But that still doesn't guarantee that the
+puzzle has a solution.
+
+Instead, I went for a cruder approach: make a random puzzle and try to find a
+solution using a solver. If a solution is found, return the puzzle. If not, make
+a new random puzzle and try again. In practice most random puzzles seem to be
+solvable, and in the worst case where the puzzle is not solvable or the solver
+is being really slow, the user can just restart the game.
+
+In code it looks like this:
+
+```haskell
 createPuzzle :: MonadRandom m => PuzzleSize -> m Bottles
 createPuzzle size = do
   bottles <- randomBottles (sizeToInt size)
@@ -447,7 +470,7 @@ data SolverState = SolverState
 ```
 
 The function then passes the initial solver state to the `solver` function,
-which is where most the magic happens:
+which is where most of the magic happens:
 
 ```haskell
 solutions :: SolverState -> [SolverState]
@@ -463,19 +486,21 @@ with their pour history. Given a solver state, it first checks if the game is
 over using the same function as before. If the game is indeed over, it returns
 the current solver state and stops the recursion. Otherwise, it finds the list
 of all valid pours from the current state and recursively calls `solutions` on
-each of them [1]. In this way, it traverses the entire tree of possible sequences of
+each of them [2]. In this way, it traverses the entire tree of possible sequences of
 pours, gathering all the solutions as it goes.
 
 The list of valid pours is created by the `possiblePours` function, which first
 creates a list of all possible pours from the bottle ids and then filters out
-the invalid ones using the `tryPour` function:
+the invalid ones using
+[mapMaybe](https://hackage.haskell.org/package/base-4.20.0.1/docs/Data-Maybe.html#v:mapMaybe)
+and the `tryPour` function:
 
 ```haskell
 possiblePours :: Bottles -> [(Pour, Bottles)]
 possiblePours bottles =
   let bottleIds = M.keys bottles
       pours = liftA2 Pour bottleIds bottleIds
-   in catMaybes (map (tryPour bottles) pours)
+   in mapMaybe (tryPour bottles) pours
 ```
 
 As its name implies, the `tryPour` function "tries" to perform a pour in the
@@ -502,7 +527,7 @@ solutions with `headMaybe`. Thanks to Haskell's
 [laziness](https://en.wikibooks.org/wiki/Haskell/Laziness), taking the head of
 the list of possible solutions means that we actually stop the traversal once
 the first solution is found, effectively transforming the solver into a
-[depth-first search](https://en.wikipedia.org/wiki/Depth-first_search) [2]! Neat
+[depth-first search](https://en.wikipedia.org/wiki/Depth-first_search) [3]! Neat
 right?
 
 The final step taken by `solve` is to extract the pour history from our solution
@@ -519,7 +544,11 @@ a Haskell clone of Water Sort, and learned a new trick or two along the way.
 
 ---
 
-[1] Note that I used the [monad instance for
+[1] My implementation of `shuffle` was an adaptation of [how QuickCheck does
+it](https://hackage.haskell.org/package/QuickCheck-2.15.0.1/docs/src/Test.QuickCheck.Gen.html#shuffle))
+which I thought was quite clever
+
+[2] Note that I used the [monad instance for
 lists](https://en.wikibooks.org/wiki/Haskell/Understanding_monads/List) here,
 but I could have just as easily used a list comprehension instead:
 
@@ -534,7 +563,7 @@ solutions state
         ]
 ```
 
-[2] I used lists and laziness in this case because it was the simplest way to
+[3] I used lists and laziness in this case because it was the simplest way to
 implement and explain the solver that I could think of. However, using lists in
 this way could still consume tons of memory as it keeps track of previous
 unsuccessful branches in memory (I believe). Instead, one could use `Maybe` and
