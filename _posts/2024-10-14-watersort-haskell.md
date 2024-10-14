@@ -15,19 +15,17 @@ it).
 In this post I'll give an overview of how I implemented the game with a simple
 terminal-based UI and a list-based solver which takes advantage of laziness. My
 goal is to show people that are perhaps not very familiar with Haskell that
-implementing a simple game like this can be fun and rewarding, and to show a
-couple cool ideas along the way like using the
-[MonadPlus](https://hackage.haskell.org/package/base-4.20.0.1/docs/Control-Monad.html#t:MonadPlus)
-instance of the list monad.
+implementing a simple game like this can be fun and rewarding, and to share a
+couple cool tricks I learned along the way.
 
 All the code for the game [is on
 GitHub](https://github.com/nicaudinet/bottles/tree/water-sort-simple), and I
-will be linking to various files there throughout the post!
+will be linking to various files there throughout the post.
 
 ## Water Sort
 
 The game starts with a bunch of bottles with colour layers stacked on top of one
-other, together with some empty bottles. The version of the game I played has
+other along with some empty bottles. The version of the game I played has
 bottles with four layers of colours and two empty bottles:
 
 ![intro-puzzle.svg]({{ site.baseurl }}public/images/water-sort/intro-puzzle.svg){:width="70%" style="display:block; margin-left:auto; margin-right:auto"}
@@ -63,10 +61,9 @@ player wins) or there are no more available actions (the player loses).
 
 ## The Model
 
-My first step was to model the game state with data types. The whole game state is
-captured by the `Bottles` type, which is
-[a
-Map](https://hackage.haskell.org/package/containers-0.7/docs/Data-Map-Lazy.html#g:1)
+My first step was to model the game state with data types. The whole game state
+is captured by the `Bottles` type, which is a
+[Map](https://hackage.haskell.org/package/containers-0.7/docs/Data-Map-Lazy.html#g:1)
 of bottles to their identifiers:
 
 ```haskell
@@ -82,8 +79,9 @@ type BottleId = Int
 type Bottle = [Color]
 ```
 
-Since we will only support levels of a fixed size, we only need our types to
-represent a dozen colours, so I decided to model `Color` with a sum type: 
+Since the game will only support levels of a fixed size, our model only needs
+to represent about a dozen colours, so I decided to model `Color` with a sum
+type: 
 
 ```haskell
 data Color
@@ -137,54 +135,52 @@ showColor color = "\x1b[48;5;" <> show (colorCode color) <> "m  \x1b[0m"
     colorCode DarkRed = 88
 ```
 
-`colorCode` here is the mapping from `Color` to `xterm-256` colour codes. The
+`colorCode` here is a mapping from `Color` to `xterm-256` colour codes. The
 weird-looking strings on either side of the colour code are the escape codes to
 set the background colour.
 
 After figuring out how to print a colour, the next challenge was to print the
-bottles side by side. Since we chose the terminal as our UI this is a little
-tricky because we can only print one row at time from top to bottom. This means
-we need to transform our `Bottles` map into a list of rows and then print them
-in sequence. To do this, I created a `Grid` type consisting of a list of `Row`s,
-which in turn consist of a list of `Square`s. A `Square` is either empty, a
-separator, or a colour:
+bottles side by side. This is made a little tricky by the fact that the terminal
+can only print one line at time from top to bottom. My solution was to first
+transform our `Bottles` map into a list of `Line`s and then print them out in
+order. I modelled a `Line` as a list of `Square`s, where each square is either
+empty, a separator or a colour:
 
 ```haskell
 data Square = Empty | Separator | Full Color
-type Row = [Square]
-type Grid = [Row]
+type Line = [Square]
 ```
 
-Then, I used an `unfoldr` to generate a `Grid` from the `Bottles`:
+Then, I used an `unfoldr` to generate the list of `Line`s:
 
 ```haskell
-bottlesToGrid :: Bottles -> Grid
-bottlesToGrid = reverse . unfoldr makeRow . map reverse . M.elems
+bottlesToGrid :: Bottles -> [Line]
+bottlesToGrid = reverse . unfoldr makeLine . map reverse . M.elems
   where
     getSquare :: Bottle -> Square
     getSquare = maybe Empty Full . headMaybe
 
-    makeRow :: [Bottle] -> Maybe (Row, [Bottle])
-    makeRow xs
+    makeLine :: [Bottle] -> Maybe (Line, [Bottle])
+    makeLine xs
       | all null xs = Nothing
       | otherwise = Just (map getSquare xs, map tailSafe xs)
 ```
 
 This function works by constructing the rows from the bottom of the bottles to
 the top, and then reversing the order of the rows at the end. The `unfoldr` uses
-a `makeRow` function which takes a list of `Bottle`s and constructs a single row
-from it. The row is constructed by mapping over the bottles with the `getSquare`
-function, which returns an `Empty` square if the bottle is empty and a `Full`
-square with the colour if it's not. If all the bottles are empty, `makeRow`
-returns `Nothing` to signal the end of the unfold. I also used two helper
-functions:
+a `makeLine` function which takes a list of `Bottle`s and constructs a single
+line from it. The line is constructed by mapping over the bottles with the
+`getSquare` function, which returns an `Empty` square if the bottle is empty and
+a `Full` square with the colour if it's not. If all the bottles are empty,
+`makeLine` returns `Nothing` to signal the end of the unfold. I also used two
+helper functions:
 - `headMaybe :: [a] -> Maybe a` is a safe version of `head` that returns
 `Nothing` when given an empty list
 - `tailSafe :: [a] -> [a]` is a version of `tail` that returns an empty list
 when given an empty list.
 
-The final step was to actually make the functions to print the rows to the
-screen:
+The final step was to actually make the functions to convert the lines to
+strings which can then be printed to the terminal:
 
 ```haskell
 showSquare :: Square -> String
@@ -192,26 +188,20 @@ showSquare Empty = "  "
 showSquare Separator = "|"
 showSquare (Full color) = showColor color
 
-showRow :: Row -> String
-showRow row =
-  let
-    squares = map showSquare row
-    separator = showSquare Separator
-  in separator <> intercalate separator squares <> separator
+showLine :: Line -> String
+showLine line =
+  let sepLine = [Separator] <> intersperse Separator line <> [Separator]
+   in concatMap showSquare sepLine
 ```
 
-The `showSquare` function uses the `showColor` function from before to print the
-full squares, and otherwise maps the other types of squares to simple strings.
-The `showRow` function maps `showSquare` over the rows created by
-`bottlesToGrid` and places a separator between square with `intercalate`. Check
-out the
+Check out
 [View.hs](https://github.com/nicaudinet/bottles/blob/water-sort-simple/src/Bottles/View.hs)
 file for the full code to show the game.
 
 ## The Update
 
 Players in this game can only make a single type of action: a pour from one
-bottle to another. Pours are captured with a product type of two bottle ids:
+bottle to another. Pours are modelled with a product type of two bottle ids:
 
 ```haskell
 data Pour = Pour
@@ -220,10 +210,9 @@ data Pour = Pour
   }
 ```
 
-For each turn in the game the user is asked to input a pour as two numbers
-separated by an arrow (e.g. "2 -> 3"). The game then takes the line as input,
-splits it on the `"->"` string, and parses the two numbers on either side. This
-is done by the `parsePour` function:
+Each turn, the user is asked to input a pour as two numbers separated by an
+arrow (for example `"2 -> 3"`). The game then takes the line as input, splits it
+on the `"->"` string and parses the two numbers on either side:
 
 ```haskell
 parsePour :: String -> Either GameError Pour
@@ -235,9 +224,9 @@ parsePour line = case splitOn "->" line of
   _ -> Left (InvalidInput line)
 ```
 
-Parsing errors are handled explicitly by returning an `Either GameError` type.
-`GameError` is a sum type that captures all the logical errors that can occur in
-the game:
+Parsing errors are handled explicitly by returning an `Either GameError Pour`.
+`GameError` here is a sum type that captures all the logical errors that can
+occur in the game:
 
 ```haskell
 data GameError
@@ -247,28 +236,28 @@ data GameError
   ...
 ```
 
-In larger projects it could be a good idea to split up error types like this
-into several smaller types, but for a small project like this I decided that
-having a single error type was good enough.
+In larger projects it could be a good idea to split up error types into several
+smaller types, but for a small project like this I decided that having a single
+error type was good enough.
 
-In `parsePour` we also make use of the monad instance of `Either` which
-short-circuits the function as soon as it encounters a `Left` value, thus
-functioning as a simple error handling mechanism. The `maybeThrow` function is a
-wrapper function which throws the given error if it encounters a `Nothing`
-value:
+I also chose to use `Either` as a simple mechanism to throw and handle errors in
+pure functions. "Throwing an error" is implemented by returning a `Left`, which
+then short-circuits the rest of the function thanks to the `Either` monad
+instance. Errors that crop up are handled in the top-level game loop. I also
+made two functions for convenience:
 
 ```haskell
 maybeThrow :: GameError -> Maybe a -> Either GameError a
 maybeThrow err Nothing = Left err
 maybeThrow _ (Just a) = Right a
+
+whenThrow :: Bool -> GameError -> Either GameError ()
+whenThrow True err = Left err
+whenThrow False _ = Right ()
 ```
 
-These errors are then handled in the top-level game loop function. If an error
-is encountered, the user is shown a message which explains the `GameError` and
-restarts the current loop. Otherwise, the game continues as normal.
-
-Once a `Pour` is parsed from the user it is passed to the `update` function
-which contains the main game state update logic:
+Once a `Pour` is received and parsed from the user it is passed to the `update`
+function which contains the main model update logic:
 
 ```haskell
 update :: Bottles -> Pour -> Either GameError Bottles
@@ -296,21 +285,11 @@ update bs (Pour from to) = do
   pure . M.insert from fromTail . M.insert to (fromHead <> toBottle) $ bs
 ```
 
-Although the looks a bit long and scary, it is essentially simple in structure:
+Although it may look intimidating, it is essentially simple in structure:
 
 1. Get the two bottles from the game state
 2. Check that the pour is valid
 3. Update the game state
-
-Like `parsePour`, it also uses `GameError` and the `Either` monad instance to
-handle errors. `whenThrow` is another helper function which takes a `Bool` and
-throws an error if it's `True`:
-
-```haskell
-whenThrow :: Bool -> GameError -> Either GameError ()
-whenThrow True err = Left err
-whenThrow False _ = Right ()
-```
 
 The full code for the update is in the
 [Update.hs](https://github.com/nicaudinet/bottles/blob/water-sort-simple/src/Bottles/Update.hs)
@@ -318,8 +297,8 @@ module.
 
 ##  Putting it all together
 
-Finally, we have all the components we need to implement the full game loop! The
-body of the loop is contained in the `step` function:
+Time to combine the components into the game loop! The body of the loop is
+contained in the `step` function:
 
 ```haskell
 step :: Bottles -> IO Bottles
@@ -333,16 +312,15 @@ step bottles = do
       pure bottles
 ```
 
-In other words, for each step we:
+In other words, for each iteration:
 
 1. Show the current state of the game
 2. Ask the user for input
 3. Parse the input
 4. Update the game state based on the input
 
-If we encounter an error in step 3 or 4, we print out the error to the user and
-return the original game state. Otherwise, we return the new game state. Also,
-notice that this is the first function we've seen that actually uses `IO`!
+If an error comes up in step 3 or 4, the game shows the error to the user and
+reverts back to the start of the turn.
 
 The last part is the actual game loop itself, which I implemented as a recursive
 function which repeatedly calls itself until the game is over:
@@ -356,33 +334,22 @@ loop bottles = do
     else loop newBottles
 ```
 
-The `gameOver` function checks whether all the bottles are properly sorted or
-not:
-
-```haskell
-validBottle :: Bottle -> Bool
-validBottle [] = True
-validBottle [a, b, c, d] = (a == b) && (b == c) && (c == d)
-validBottle _ = False
-
-gameOver :: Bottles -> Bool
-gameOver = all validBottle . M.elems
-```
+The code for the game loop is in
+[Main.hs](https://github.com/nicaudinet/bottles/blob/water-sort-simple/exe/Main.hs).
 
 # Creating puzzles
 
-Now that we have a working game, we need a way to generate new puzzles so that
-users can play the game to their heart's content. To help learn the game, I also
-decided to support three puzzle sizes:
+Now that I had a working game, I needed a way to generate new puzzles so that
+users (me, myself and I) can play the game to their heart's content. To help
+learn the game, I also decided to support three puzzle sizes:
 
 ```haskell
 data PuzzleSize = Small | Medium | Large
 ```
 
-Given a puzzle size, the next thing to do is to figure out which (and how many)
-colours to use in the puzzle. I arbitrarily decided to use 4, 7, and 10 colours
-for the small, medium, and large puzzles respectively, and used `toEnum` from
-the
+Given a puzzle size, the next thing to do is to pick which (and how many)
+colours to use in the puzzle. I arbitrarily decided on 4, 7, and 10 colours for
+the small, medium, and large puzzles respectively, and used `toEnum` from the
 [Enum](https://hackage.haskell.org/package/base-4.20.0.1/docs/Prelude.html#t:Enum)
 class to make the list of colours of the appropriate size:
 
@@ -394,17 +361,11 @@ colorPalette Large = map toEnum [0 .. 9]
 ```
 
 The puzzles start with the same number of full bottles as the number of colours.
-Mirroring the version of the game I've been playing, I also decided to use
-bottles of height 4, and to add two extra empty bottles at the start. To make a
-new puzzle, I therefore:
+Mirroring the version of the game I've been playing, I decided to use
+bottles of height 4 and to add 2 extra empty bottles at the start.
 
-1. Make a list with 4 copies of each colour
-2. Shuffle it
-3. Split it into a list of bottles of height 4
-4. Add two empty bottles
-5. Convert the list into a `Map`
-
-In code it looks like this:
+I ended up with the following function to make a new random assortment of
+bottles:
 
 ```haskell
 randomBottles :: MonadRandom m => PuzzleSize -> m Bottles
@@ -415,28 +376,24 @@ randomBottles size = do
   pure (M.fromList $ zip [0 ..] bottles)
 ```
 
-I used two helper functions here:
+In words, `randomBottles`:
 
-- `shuffle :: MonadRandom m => [a] -> m [a]` which takes a list and returns a
-random permutation of it [1]
-- `chunksOf :: Int -> [a] -> [[a]]` which takes a list and breaks it up into
-chunks of a specified length
+1. Makes a list with 4 copies of each colour
+2. Shuffles it
+3. Splits it into a list of bottles of height 4
+4. Adds two empty bottles
+5. Converts the list into a `Map`
 
-But, you might ask: how do we know that the puzzle is actually solvable? Turns
-out that some mathematicians actually [studied this
-problem](https://arxiv.org/pdf/2202.09495) and found some bounds for the minimum
-number of empty bottles needed to ensure the puzzle is always solvable. Plugging
-in our parameters, two empty bottles seems to be the exact lower bound for all
-three puzzle sizes ... interesting! But that still doesn't guarantee that the
-puzzle has a solution.
+But, you might ask: how do you know that the puzzle is actually solvable?
+Interestingly, after some Googling I discovered that some mathematicians
+actually [studied this problem](https://arxiv.org/pdf/2202.09495) and found some
+bounds for the minimum number of empty bottles needed to ensure the puzzle is
+always solvable. Plugging in our parameters, two empty bottles seems to be the
+exact lower bound for all three puzzle sizes. Cool! But that still doesn't
+guarantee that the puzzle has a solution.
 
-Instead, I went for a cruder approach: make a random puzzle and try to find a
-solution using a solver. If a solution is found, return the puzzle. If not, make
-a new random puzzle and try again. In practice most random puzzles seem to be
-solvable, and in the worst case where the puzzle is not solvable or the solver
-is being really slow, the user can just restart the game.
-
-In code it looks like this:
+Instead, I went for a cruder approach and made a function that makes random
+puzzles and tries to solve them until it finds one that has a solution:
 
 ```haskell
 createPuzzle :: MonadRandom m => PuzzleSize -> m Bottles
@@ -447,11 +404,14 @@ createPuzzle size = do
   else createPuzzle size
 ```
 
+In practice most random puzzles seem to be solvable, and in the worst case where
+the puzzle is not solvable or the solver is being really slow the user can just
+restart the game.
+
 # Solving the game
 
-To solve the game we need to find a sequence of pours that will sort an initial
-set of bottles (where possible). In my case, I implemented the solver as
-follows:
+To solve the game one needs to find a sequence of pours that will sort an
+initial set of bottles (where possible). I implemented the solver as follows:
 
 ```haskell
 solve :: Bottles -> Maybe [Pour]
@@ -469,7 +429,7 @@ data SolverState = SolverState
   }
 ```
 
-The function then passes the initial solver state to the `solver` function,
+The function then passes the initial solver state to the `solutions` function,
 which is where most of the magic happens:
 
 ```haskell
@@ -486,14 +446,13 @@ with their pour history. Given a solver state, it first checks if the game is
 over using the same function as before. If the game is indeed over, it returns
 the current solver state and stops the recursion. Otherwise, it finds the list
 of all valid pours from the current state and recursively calls `solutions` on
-each of them [2]. In this way, it traverses the entire tree of possible sequences of
+each of them [1]. In this way, it traverses the entire tree of possible sequences of
 pours, gathering all the solutions as it goes.
 
 The list of valid pours is created by the `possiblePours` function, which first
-creates a list of all possible pours from the bottle ids and then filters out
-the invalid ones using
+creates a list of all possible pours and then filters out the invalid ones using
 [mapMaybe](https://hackage.haskell.org/package/base-4.20.0.1/docs/Data-Maybe.html#v:mapMaybe)
-and the `tryPour` function:
+and `tryPour`:
 
 ```haskell
 possiblePours :: Bottles -> [(Pour, Bottles)]
@@ -520,14 +479,14 @@ bottles forever, are prevented by an extra check in the `update` function that
 ensures these types of pours are considered invalid. In turn, this ensures that
 the `solutions` function is always guaranteed to terminate.
 
-However, the careful reader however might notice that traversing the entire tree
-of possible pour sequences can quickly become computationally infeasible. This
-is where the second bit of magic comes in: we take the head of the list of
-solutions with `headMaybe`. Thanks to Haskell's
+However, traversing the entire tree of possible pour sequences can quickly
+become computationally infeasible. This is where the second bit of magic comes
+in: thanks to Haskell's
 [laziness](https://en.wikibooks.org/wiki/Haskell/Laziness), taking the head of
-the list of possible solutions means that we actually stop the traversal once
-the first solution is found, effectively transforming the solver into a
-[depth-first search](https://en.wikipedia.org/wiki/Depth-first_search) [3]! Neat
+the list of possible solutions with `headMaybe` means that we actually only
+compute the first solution and leave the rest as
+[thunks](https://wiki.haskell.org/Thunk), effectively morphing the solver into a
+[depth-first search](https://en.wikipedia.org/wiki/Depth-first_search) [2]! Neat
 right?
 
 The final step taken by `solve` is to extract the pour history from our solution
@@ -536,19 +495,25 @@ solver is contained in the
 [Solver.hs](https://github.com/nicaudinet/bottles/blob/water-sort-simple/src/Bottles/Solver.hs)
 module.
 
-And that's it! Hope you enjoyed this little journey through my implementation of
-a Haskell clone of Water Sort, and learned a new trick or two along the way.
-'Till next time!
+# Next steps
 
+Although the game is playable at this point there are still lots of things one
+could improve. Here are some ideas:
 
+- **Undo** - Add a way to undo a move. At the moment players have no way to
+backtrack if they make a mistake, which can quickly get annoying
+- **Save** - Add a way to save a puzzle and come back to it later. This could
+even be used to share puzzles with others
+backtrack if they make a mistake, which can quickly get annoying
+- **Web** - Make it playable on the web! It should be straightforward to port the
+game to [PureScript](https://www.purescript.org/) and make a simple UI for it
+
+And that's it! Hope you enjoyed coming on this this little journey with me and
+maybe even learned a new trick or two along the way.
 
 ---
 
-[1] My implementation of `shuffle` was an adaptation of [how QuickCheck does
-it](https://hackage.haskell.org/package/QuickCheck-2.15.0.1/docs/src/Test.QuickCheck.Gen.html#shuffle))
-which I thought was quite clever
-
-[2] Note that I used the [monad instance for
+[1] I used the [monad instance for
 lists](https://en.wikibooks.org/wiki/Haskell/Understanding_monads/List) here,
 but I could have just as easily used a list comprehension instead:
 
@@ -563,10 +528,10 @@ solutions state
         ]
 ```
 
-[3] I used lists and laziness in this case because it was the simplest way to
-implement and explain the solver that I could think of. However, using lists in
-this way could still consume tons of memory as it keeps track of previous
-unsuccessful branches in memory (I believe). Instead, one could use `Maybe` and
+[2] I used lists and laziness in this case because it was the simplest way I
+could think of to implement and explain the solver. However, using lists in this
+way could still consume tons of memory as it keeps track of previous
+unsuccessful branches in memory (I think). Instead, one could use `Maybe` and
 its
 [MonadPlus](https://hackage.haskell.org/package/base-4.20.0.1/docs/Control-Monad.html#t:MonadPlus)
 instance to implement a constant-space search.
