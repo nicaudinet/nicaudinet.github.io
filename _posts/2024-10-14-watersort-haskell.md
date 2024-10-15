@@ -261,35 +261,20 @@ function which contains the main model update logic:
 
 ```haskell
 update :: Bottles -> Pour -> Either GameError Bottles
-update bs (Pour from to) = do
-  -- Get the bottles
-  fromBottle <- maybeThrow (BottleNotFound from) (M.lookup from bs)
-  toBottle <- maybeThrow (BottleNotFound to) (M.lookup to bs)
-  -- Check that from and to are different
-  whenThrow (from == to) (FromAndToAreTheSame from)
-  -- Check there are colors in the from bottle
-  (fromHead, fromTail) <- case group fromBottle of
-    [] -> Left (FromBottleIsEmpty from)
-    (x : xs) -> Right (x, concat xs)
-  -- Check we're not just swapping bottles (no cycles) 
-  whenThrow (null fromTail && null toBottle) NoOpAction
-  -- Check there's space in the to bottle
-  whenThrow (length toBottle > 4 - length fromHead) (ToBottleIsTooFull to)
-  -- Check the colors match
-  let fromColor = head fromHead
-  case headMaybe toBottle of
-    Nothing -> Right ()
-    Just toColor ->
-      whenThrow (fromColor /= toColor) (ColorsDontMatch fromColor toColor)
-  -- Update and return the game state
-  pure . M.insert from fromTail . M.insert to (fromHead <> toBottle) $ bs
+update bottles pour@(Pour from to) = do
+  (fromBottle, toBottle) <- getPourBottles bottles pour
+  (fromHead, fromTail) <- validate pour fromBottle toBottle
+  let insertFrom = M.insert from fromTail
+  let insertTo = M.insert to (fromHead <> toBottle)
+  pure . insertFrom . insertTo $ bottles
 ```
 
-Although it may look intimidating, it is essentially simple in structure:
-
-1. Get the two bottles from the game state
-2. Check that the pour is valid
-3. Update the game state
+This function essentially get the two bottles from the game state, check that
+the pour is valid, splits the colours in the `from` bottle into the part that
+will be poured into the `to` bottle and the part that will stay, and then
+updates the game state with the new bottles. `getPourBottles` and `validate`
+help with doing that and contain most of the logic that ensures that the pour
+follows what is allowed by the rules of the game. 
 
 The full code for the update is in the
 [Update.hs](https://github.com/nicaudinet/bottles/blob/water-sort-simple/src/Bottles/Update.hs)
@@ -506,6 +491,8 @@ backtrack if they make a mistake, which can quickly get annoying
 even be used to share puzzles with others
 - **Web** - Make it playable on the web! It should be straightforward to port the
 game to [PureScript](https://www.purescript.org/) and make a simple UI for it
+- **Tests** - Add some tests to ensure that our implementation actually respects
+  the rules of the game
 
 And that's it! Hope you enjoyed coming on this this little journey with me and
 maybe even learned a new trick or two along the way.
