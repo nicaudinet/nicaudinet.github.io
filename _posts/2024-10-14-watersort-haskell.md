@@ -504,7 +504,6 @@ could improve. Here are some ideas:
 backtrack if they make a mistake, which can quickly get annoying
 - **Save** - Add a way to save a puzzle and come back to it later. This could
 even be used to share puzzles with others
-backtrack if they make a mistake, which can quickly get annoying
 - **Web** - Make it playable on the web! It should be straightforward to port the
 game to [PureScript](https://www.purescript.org/) and make a simple UI for it
 
