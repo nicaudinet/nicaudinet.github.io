@@ -10,3 +10,13 @@ simple logo that includes elements from Haskell, complex systems and causality".
 
 If you find any mistakes in my posts, please feel free to make an issue about
 it!
+
+## Running locally
+
+1) Download [Jekyll prerequisites](https://jekyllrb.com/docs/installation/).
+2) Clone this repository and `cd` into it
+3) Run the following command to start a local server:
+
+```bash
+bundle exec jekyll serve
+```
