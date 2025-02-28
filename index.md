@@ -29,9 +29,8 @@ research lies at the intersection of causality and natural language processing.
 
 Previously, I worked as a software engineer at [Relex
 Solutions](https://www.relexsolutions.com/) where I helped develop an internal
-tool to manage the installation and customization. I primarily worked with
-Haskell, Nix and Linux. Functional programming is my favorite programming
-paradigm.
+deployment tool. I primarily worked with Haskell, Elm, Nix and Linux. Functional
+programming is my favourite programming paradigm.
 
 I did my bachelor and masters at the [University of
 Bristol](https://www.bristol.ac.uk/) in Computer Science and Electronics. I also
