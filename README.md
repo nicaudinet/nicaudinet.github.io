@@ -1,6 +1,6 @@
 # Nicolas Audinet de Pieuchon
 
-The Github repository for my personal website and blog.
+The GitHub repository for my personal website.
 
 The logo was made using generative AI from
 [stablediffucionweb.com](https://stablediffusionweb.com) with the prompt "Make a

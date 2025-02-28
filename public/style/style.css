@@ -146,7 +146,7 @@ pre code {
     color: rgba(0, 0, 0, 0.5);
 }
 
-/* Posts (any blog post with the top bar) */
+/* Posts (any post with the top bar) */
 
 .post {
     max-width: var(--max-text-width);
@@ -159,7 +159,7 @@ pre code {
     text-justify: inter-word;
 }
 
-/* Blog post or page title */
+/* Post or page title */
 .post-title,
 .post-title a {
     color: var(--sidebar-color);
@@ -251,7 +251,7 @@ a.sidebar-nav-item:hover, a.sidebar-nav-item:focus {
 
 /* Topbar
 *
-* Top bar navigation for blog posts
+* Top bar navigation for posts
 */
 
 .topbar-nav {
