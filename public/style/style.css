@@ -234,13 +234,19 @@ pre code {
     text-wrap: wrap;
 }
 
+.sidebar-icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 .sidebar-icons a {
     text-decoration: none;
 }
 
 .sidebar-icon {
-    max-width: var(--sidebar-icon-size);
-    max-height: var(--sidebar-icon-size);
+    width: var(--sidebar-icon-size);
+    height: var(--sidebar-icon-size);
     margin-left: .5rem;
     margin-right: .5rem;
 }
@@ -386,11 +392,6 @@ a.topbar-nav-item:focus {
   .sidebar-nav {
     display: flex;
     flex-direction: column;
-  }
-
-  .sidebar-icons {
-    display: flex;
-    flex-direction: row;
   }
 
   .about-title {
