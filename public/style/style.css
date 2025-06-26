@@ -5,7 +5,7 @@
 /* Global variable definitions */
 :root {
     --mobile-topbar-height: 2.5em;
-    --sidebar-width: clamp(180px, 25vw, 320px);
+    --sidebar-width: clamp(180px, 25vw, 400px);
     --page-width: 75vw;
     --max-text-width: 40rem;
     --main-font-size: 20px;
