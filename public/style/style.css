@@ -6,9 +6,19 @@
 :root {
     --sidebar-width: 25rem;
     --max-text-width: 40rem;
-    --sidebar-color: #306b40; /* A dark, reddish green */
     --main-font-size: 20px;
     --sidebar-icon-size: 2rem;
+    --link-color: #268bd2;
+    --text-color: #515151;
+    --background-color: #fff;
+    --sidebar-background-color: #306b40; /* A dark, reddish green */
+    --sidebar-text-color: #fff; /* A dark, reddish green */
+    --warning-background-color: #fff3cd;
+    --warning-text-color: #856404;
+    --warning-border-color: #ffeeba;
+    --code-background-color: #f9f9f9;
+    --code-text-color: #bf616a;
+    --muted-text-color: #9a9a9a;
 }
 
 
@@ -27,13 +37,13 @@ html {
 body {
     margin: 0;
     padding: 0;
-    color: #515151;
-    background-color: #fff;
+    color: var(--text-color);
+    background-color: var(--background-color);
 }
 
 /* No `:visited` state is required by default (browsers will use `a`) */
 a {
-    color: #268bd2;
+    color: var(--link-color);
     text-decoration: none;
 }
 
@@ -51,7 +61,7 @@ h1, h2 {
     margin-bottom: .5rem;
     font-weight: bold;
     line-height: 1.25;
-    color: var(--sidebar-color);
+    color: var(--sidebar-background-color);
     text-rendering: optimizeLegibility;
 }
 
@@ -70,7 +80,7 @@ p {
 }
 
 strong {
-    color: var(--sidebar-color);
+    color: var(--sidebar-background-color);
 }
 
 
@@ -96,8 +106,8 @@ code, pre {
 code {
     padding: .25em .5em;
     font-size: 85%;
-    color: #bf616a;
-    background-color: #f9f9f9;
+    color: var(--code-text-color);
+    background-color: var(--code-background-color);
     border-radius: 3px;
 }
 
@@ -112,7 +122,7 @@ pre {
     white-space: pre-wrap;
     word-break: break-all;
     word-wrap: break-word;
-    background-color: #f9f9f9;
+    background-color: var(--code-background-color);
 }
 
 pre code {
@@ -135,7 +145,7 @@ pre code {
 
 .about-title {
     font-size: 2.5rem;
-    color: var(--sidebar-color);
+    color: var(--sidebar-background-color);
 }
 
 .about-email {
@@ -162,7 +172,7 @@ pre code {
 /* Post or page title */
 .post-title,
 .post-title a {
-    color: var(--sidebar-color);
+    color: var(--sidebar-background-color);
     margin-top: 0;
     font-size: 2rem;
 }
@@ -172,7 +182,7 @@ pre code {
     display: block;
     margin-top: -.5rem;
     margin-bottom: 1rem;
-    color: #9a9a9a;
+    color: var(--muted-text-color);
     font-size: 1.25rem;
 }
 
@@ -188,8 +198,8 @@ pre code {
     height: 100%;
     padding-left: 1rem;
     padding-right: 1rem;
-    color: #fff;
-    background-color: var(--sidebar-color);
+    color: var(--sidebar-text-color);
+    background-color: var(--sidebar-background-color);
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -205,7 +215,7 @@ pre code {
 }
 
 .sidebar-name {
-    color: #fff;
+    color: var(--sidebar-text-color);
     margin-top: 1rem;
     font-size: 1.75rem;
     font-weight: bold;
@@ -232,7 +242,7 @@ pre code {
     display: block;
     line-height: 1.5;
     font-size: 1.75rem;
-    color: #fff;
+    color: var(--sidebar-text-color);
 }
 
 a.sidebar-nav-item:hover, a.sidebar-nav-item:focus {
@@ -260,8 +270,8 @@ a.sidebar-nav-item:hover, a.sidebar-nav-item:focus {
     display: flex;
     justify-content: space-evenly;
     list-style-type: none;
-    background-color: var(--sidebar-color);
-    color: #fff;
+    background-color: var(--sidebar-background-color);
+    color: var(--sidebar-text-color);
 }
 
 .topbar-nav-item {
@@ -271,7 +281,7 @@ a.sidebar-nav-item:hover, a.sidebar-nav-item:focus {
 }
 
 .topbar-nav-item a {
-    color: #fff;
+    color: var(--sidebar-text-color);
     padding-left: 0.5rem;
     padding-right: 0.5rem;
 }
@@ -289,16 +299,8 @@ a.topbar-nav-item:focus {
 
 .block-warning {
   padding: 20px;
-  background-color: #fff3cd;
-  color: #856404;
-  border-left: 3px solid #ffeeba;
-  border-radius: 4px;
-}
-
-.block-warning {
-  padding: 20px;
-  background-color: #fff3cd;
-  color: #856404;
-  border-left: 3px solid #ffeeba;
+  background-color: var(--warning-background-color);
+  color: var(--warning-text-color);
+  border-left: 3px solid var(--warning-border-color);
   border-radius: 4px;
 }
