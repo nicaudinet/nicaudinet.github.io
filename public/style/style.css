@@ -4,6 +4,7 @@
 
 /* Global variable definitions */
 :root {
+    --mobile-topbar-height: 2.5em;
     --sidebar-width: 25rem;
     --max-text-width: 40rem;
     --main-font-size: 20px;
@@ -40,6 +41,13 @@ body {
     color: var(--text-color);
     background-color: var(--background-color);
 }
+
+/* Ensure images dont't overflow their containers on mobile */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
 
 /* No `:visited` state is required by default (browsers will use `a`) */
 a {
@@ -219,6 +227,7 @@ pre code {
     margin-top: 1rem;
     font-size: 1.75rem;
     font-weight: bold;
+    text-wrap: wrap;
 }
 
 .sidebar-icons a {
@@ -257,7 +266,6 @@ a.sidebar-nav-item:hover, a.sidebar-nav-item:focus {
     font-size: 0.75rem;
     text-align: center;
 }
-
 
 /* Topbar
 *
@@ -303,4 +311,123 @@ a.topbar-nav-item:focus {
   color: var(--warning-text-color);
   border-left: 3px solid var(--warning-border-color);
   border-radius: 4px;
+}
+
+/* Mobile Top-Bar */
+
+/* Hide mobile topbar by default (desktop), show on mobile */
+.mobile-topbar {
+  display: none;
+  background: var(--sidebar-background-color);
+  color: var(sidebar-text-color);
+  padding-left: 1em;
+  position: fixed;
+  width: 100vw;
+  height: var(--mobile-topbar-height);
+  top: 0;
+  left: 0;
+}
+
+.mobile-topbar #sidebar-toggle {
+  background: none;
+  border: none;
+  color: var(--sidebar-text-color);
+  font-size: 2em;
+  cursor: pointer;
+}
+
+/* ================================
+   Responsive (Mobile) adjustments
+   ================================ */
+
+@media (max-width: 800px) {
+  :root {
+    --sidebar-width: 100vw; /* sidebar fills width if needed */
+    --max-text-width: 100vw;
+    --main-font-size: 18px;   /* optionally a smaller font */
+  }
+
+  body {
+    font-size: var(--main-font-size);
+  }
+
+  /* Hide the mobile topbar when the sidebar is open */
+  body.sidebar-open .mobile-topbar {
+    display: none;
+  }
+
+  .mobile-topbar {
+    display: flex;
+    background-color: var(--sidebar-background-color);
+    justify-content: space-between;
+  }
+
+  /* Sidebar hidden by default (moved to left) */
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw; /* or adjust as needed */
+    transform: translateX(-110%);
+    color: var(--sidebar-text-color);
+    background-color: var(--sidebar-background-color);
+  }
+
+  /* When sidebar is open, slide in */
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar-icons {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .about-title {
+    font-size: 1.5rem;
+  }
+
+  .about-email {
+    font-size: 1rem;
+    margin-bottom: 1em;
+  }
+
+  /* Page and post content stretches full width, no left margin */
+  .page {
+    margin: 0;
+    padding-top: calc(var(--mobile-topbar-height) + 0.5em);
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  /* Page and post content stretches full width, no left margin */
+  .post {
+    margin: 0;
+    padding-top: 30px;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .post-title, .post-title a {
+    font-size: 1.5rem;
+    margin: 0;
+  }
+
+  .post-date {
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  .topbar-nav {
+    font-size: 0.9rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
 }

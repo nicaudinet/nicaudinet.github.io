@@ -2,8 +2,40 @@
 layout: default
 ---
 
+<div class="mobile-topbar">
+  <button id="sidebar-toggle" aria-label="Open menu"> ☰</button>
+</div>
+
 {% include sidebar.html %}
 
 <div class="page">
     {{ content }}
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  var sidebar = document.querySelector('.sidebar');
+  var toggle = document.getElementById('sidebar-toggle');
+
+  function openSidebar() {
+    sidebar.classList.add('open');
+    document.body.style.overflow = 'hidden'; // prevent scroll behind
+    document.body.classList.add('sidebar-open');
+  }
+
+  function closeSidebar() {
+    sidebar.classList.remove('open');
+    document.body.style.overflow = '';
+    document.body.classList.remove('sidebar-open');
+  }
+
+  toggle.addEventListener('click', openSidebar);
+
+  // Optional: close sidebar with Escape key
+  document.addEventListener('keydown', function(e){
+    if (e.key === "Escape") closeSidebar();
+  });
+});
+</script>
+
