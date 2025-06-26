@@ -5,7 +5,8 @@
 /* Global variable definitions */
 :root {
     --mobile-topbar-height: 2.5em;
-    --sidebar-width: 25rem;
+    --sidebar-width: clamp(180px, 25vw, 320px);
+    --page-width: 75vw;
     --max-text-width: 40rem;
     --main-font-size: 20px;
     --sidebar-icon-size: 2rem;
@@ -147,8 +148,10 @@ pre code {
     padding-top: 4rem;
     padding-bottom: 4rem;
     /* margin */
-    margin-left: calc(var(--sidebar-width) + (100% - var(--sidebar-width) - var(--max-text-width)) / 2);
+    margin-left: calc(var(--sidebar-width) + max((100% - var(--sidebar-width) - var(--max-text-width)) / 2, 0px) + 20px);
+    margin-right: 20px;
     max-width: var(--max-text-width);
+    /* max-width: min(var(--max-text-width), calc(100% - var(--sidebar-width) - 40px); */
 }
 
 .about-title {
@@ -212,6 +215,7 @@ pre code {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-sizing: border-box;
 }
 
 .sidebar-avatar {
