@@ -13,8 +13,10 @@
     --link-color: #268bd2;
     --text-color: #515151;
     --background-color: #fff;
-    --sidebar-background-color: #306b40; /* A dark, reddish green */
-    --sidebar-text-color: #fff; /* A dark, reddish green */
+    --sidebar-background-color: #306b40;
+    /* A dark, reddish green */
+    --sidebar-text-color: #fff;
+    /* A dark, reddish green */
     --warning-background-color: #fff3cd;
     --warning-text-color: #856404;
     --warning-border-color: #ffeeba;
@@ -48,7 +50,7 @@ img {
     max-width: 100%;
     height: auto;
     display: block;
-  }
+}
 
 /* No `:visited` state is required by default (browsers will use `a`) */
 a {
@@ -61,12 +63,14 @@ a strong {
 }
 
 /* `:focus` is linked to `:hover` for basic accessibility */
-a:hover, a:focus {
+a:hover,
+a:focus {
     text-decoration: underline;
 }
 
 /* Headings */
-h1, h2 {
+h1,
+h2 {
     margin-bottom: .5rem;
     font-weight: bold;
     line-height: 1.25;
@@ -94,7 +98,9 @@ strong {
 
 
 /* Lists */
-ul, ol, dl {
+ul,
+ol,
+dl {
     margin-top: 0;
     margin-bottom: 1rem;
 }
@@ -108,7 +114,8 @@ dd {
 }
 
 /* Code */
-code, pre {
+code,
+pre {
     font-family: Menlo, Monaco, "Courier New", monospace;
 }
 
@@ -260,11 +267,12 @@ pre code {
 .sidebar-nav-item {
     display: block;
     line-height: 1.5;
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     color: var(--sidebar-text-color);
 }
 
-a.sidebar-nav-item:hover, a.sidebar-nav-item:focus {
+a.sidebar-nav-item:hover,
+a.sidebar-nav-item:focus {
     text-decoration: underline;
 }
 
@@ -316,34 +324,34 @@ a.topbar-nav-item:focus {
 /* Markdown Blocks */
 
 .block-warning {
-  padding: 20px;
-  background-color: var(--warning-background-color);
-  color: var(--warning-text-color);
-  border-left: 3px solid var(--warning-border-color);
-  border-radius: 4px;
+    padding: 20px;
+    background-color: var(--warning-background-color);
+    color: var(--warning-text-color);
+    border-left: 3px solid var(--warning-border-color);
+    border-radius: 4px;
 }
 
 /* Mobile Top-Bar */
 
 /* Hide mobile topbar by default (desktop), show on mobile */
 .mobile-topbar {
-  display: none;
-  background: var(--sidebar-background-color);
-  color: var(sidebar-text-color);
-  padding-left: 1em;
-  position: fixed;
-  width: 100vw;
-  height: var(--mobile-topbar-height);
-  top: 0;
-  left: 0;
+    display: none;
+    background: var(--sidebar-background-color);
+    color: var(sidebar-text-color);
+    padding-left: 1em;
+    position: fixed;
+    width: 100vw;
+    height: var(--mobile-topbar-height);
+    top: 0;
+    left: 0;
 }
 
 .mobile-topbar #sidebar-toggle {
-  background: none;
-  border: none;
-  color: var(--sidebar-text-color);
-  font-size: 2em;
-  cursor: pointer;
+    background: none;
+    border: none;
+    color: var(--sidebar-text-color);
+    font-size: 2em;
+    cursor: pointer;
 }
 
 /* ================================
@@ -351,88 +359,92 @@ a.topbar-nav-item:focus {
    ================================ */
 
 @media (max-width: 800px) {
-  :root {
-    --sidebar-width: 100vw; /* sidebar fills width if needed */
-    --max-text-width: 100vw;
-    --main-font-size: 18px;   /* optionally a smaller font */
-  }
+    :root {
+        --sidebar-width: 100vw;
+        /* sidebar fills width if needed */
+        --max-text-width: 100vw;
+        --main-font-size: 18px;
+        /* optionally a smaller font */
+    }
 
-  body {
-    font-size: var(--main-font-size);
-  }
+    body {
+        font-size: var(--main-font-size);
+    }
 
-  /* Hide the mobile topbar when the sidebar is open */
-  body.sidebar-open .mobile-topbar {
-    display: none;
-  }
+    /* Hide the mobile topbar when the sidebar is open */
+    body.sidebar-open .mobile-topbar {
+        display: none;
+    }
 
-  .mobile-topbar {
-    display: flex;
-    background-color: var(--sidebar-background-color);
-    justify-content: space-between;
-  }
+    .mobile-topbar {
+        display: flex;
+        background-color: var(--sidebar-background-color);
+        justify-content: space-between;
+    }
 
-  /* Sidebar hidden by default (moved to left) */
-  .sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    height: 100vh;
-    width: 100vw; /* or adjust as needed */
-    transform: translateX(-110%);
-    color: var(--sidebar-text-color);
-    background-color: var(--sidebar-background-color);
-  }
+    /* Sidebar hidden by default (moved to left) */
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        width: 100vw;
+        /* or adjust as needed */
+        transform: translateX(-110%);
+        color: var(--sidebar-text-color);
+        background-color: var(--sidebar-background-color);
+    }
 
-  /* When sidebar is open, slide in */
-  .sidebar.open {
-    transform: translateX(0);
-  }
+    /* When sidebar is open, slide in */
+    .sidebar.open {
+        transform: translateX(0);
+    }
 
-  .sidebar-nav {
-    display: flex;
-    flex-direction: column;
-  }
+    .sidebar-nav {
+        display: flex;
+        flex-direction: column;
+    }
 
-  .about-title {
-    font-size: 1.5rem;
-  }
+    .about-title {
+        font-size: 1.5rem;
+    }
 
-  .about-email {
-    font-size: 1rem;
-    margin-bottom: 1em;
-  }
+    .about-email {
+        font-size: 1rem;
+        margin-bottom: 1em;
+    }
 
-  /* Page and post content stretches full width, no left margin */
-  .page {
-    margin: 0;
-    padding-top: calc(var(--mobile-topbar-height) + 0.5em);
-    padding-left: 10px;
-    padding-right: 10px;
-  }
+    /* Page and post content stretches full width, no left margin */
+    .page {
+        margin: 0;
+        padding-top: calc(var(--mobile-topbar-height) + 0.5em);
+        padding-left: 10px;
+        padding-right: 10px;
+    }
 
-  /* Page and post content stretches full width, no left margin */
-  .post {
-    margin: 0;
-    padding-top: 30px;
-    padding-left: 0px;
-    padding-right: 0px;
-  }
+    /* Page and post content stretches full width, no left margin */
+    .post {
+        margin: 0;
+        padding-top: 30px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
 
-  .post-title, .post-title a {
-    font-size: 1.5rem;
-    margin: 0;
-  }
+    .post-title,
+    .post-title a {
+        font-size: 1.5rem;
+        margin: 0;
+    }
 
-  .post-date {
-    font-size: 1rem;
-    margin: 0;
-  }
+    .post-date {
+        font-size: 1rem;
+        margin: 0;
+    }
 
-  .topbar-nav {
-    font-size: 0.9rem;
-    flex-direction: column;
-    align-items: flex-start;
-  }
+    .topbar-nav {
+        font-size: 0.9rem;
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
 }
