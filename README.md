@@ -16,7 +16,11 @@ it!
 1) Download [Jekyll prerequisites](https://jekyllrb.com/docs/installation/).
 2) Clone this repository and `cd` into it
 3) Run the following command to start a local server:
-
 ```bash
 bundle exec jekyll serve
+```
+
+If you want the website to live-reload, add it as a flag:
+```bash
+bundle exec jekyll serve --livereload
 ```
