@@ -11,13 +11,19 @@ order: 3
 Nicolas Audinet de Pieuchon, Adel Daoud, Connor Jerzak, Moa Johansson, Richard Johansson  
 EMNLP 2025  
 [ [data] ](https://huggingface.co/datasets/nicaudinet/llm-debiasing-benchmark)
+[ [code] ](https://github.com/nicaudinet/llm-debiasing-benchmark)
+[ [video] ](https://www.youtube.com/watch?v=h8joTvlvEGI)
+[ [slides] ]({{ site.baseurl }}public/slides/benchmarking-debiasing-methods.pdf)
+[ [poster] ]({{ site.baseurl }}public/posters/benchmarking-debiasing-methods.pdf)
 
 ## 2024
 
 [Can Large Language Models (or Humans) Disentangle Text?](https://aclanthology.org/2024.nlpcss-1.5/)  
 Nicolas Audinet de Pieuchon, Adel Daoud, Connor Jerzak, Moa Johansson, Richard Johansson  
 NLP+CSS Workshop at NAACL 2024  
+[ [code] ](https://github.com/nicaudinet/llm-distillator)
 [ [poster] ]({{ site.baseurl }}public/posters/can-llms-disentangle-text.pdf)
+[ [video] ](https://www.youtube.com/watch?v=CW7HPNMVxTg)
 
 ## 2023
 
