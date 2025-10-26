@@ -1,0 +1,72 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.2.5 Chrome/138.0.7204.251 Electron/37.6.1 Safari/537.36" version="28.2.5" pages="2">
+  <diagram name="Contingency Table Input" id="9VH5b8Fa2JbuljLMYp_g">
+    <mxGraphModel dx="1028" dy="739" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="1" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="1QWMunRO2PnXnAV16ECd-7" value="\[p_A = \frac{A}{N}\]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="200" y="410" width="80" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="1QWMunRO2PnXnAV16ECd-19" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Input dataset \(\mathbb{D} \)&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="115" y="315" width="250" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="-vbkDXZ73RZO7_1ilHii-1" value="\[p_B = \frac{B}{N}\]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="410" width="80" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="-vbkDXZ73RZO7_1ilHii-2" value="\[p_C = \frac{C}{N}\]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="460" width="80" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="-vbkDXZ73RZO7_1ilHii-3" value="\[p_D = \frac{D}{N}\]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="460" width="80" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="-vbkDXZ73RZO7_1ilHii-4" value="&lt;b&gt;\[Y=0\]&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#F5F5F5,#252525);strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="360" width="80" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="-vbkDXZ73RZO7_1ilHii-5" value="&lt;b&gt;\[Y=1\]&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#F5F5F5,#252525);strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="360" width="80" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="-vbkDXZ73RZO7_1ilHii-6" value="&lt;b&gt;\[X=0\]&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#F5F5F5,#252525);strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="410" width="80" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="-vbkDXZ73RZO7_1ilHii-7" value="&lt;b&gt;\[X=1\]&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#F5F5F5,#252525);strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="460" width="80" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="Contingency Table Output" id="Lg6OrXh5tZCZkgGTZe7F">
+    <mxGraphModel dx="1234" dy="887" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="1" shadow="0">
+      <root>
+        <mxCell id="C75qWA-jylZPCNrvE4Wm-0" />
+        <mxCell id="C75qWA-jylZPCNrvE4Wm-1" parent="C75qWA-jylZPCNrvE4Wm-0" />
+        <mxCell id="C75qWA-jylZPCNrvE4Wm-11" value="\[p_a = \frac{a}{n}\]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;strokeWidth=1;" vertex="1" parent="C75qWA-jylZPCNrvE4Wm-1">
+          <mxGeometry x="520" y="410" width="80" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="C75qWA-jylZPCNrvE4Wm-12" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Output dataset \(\mathbb{d} \)&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="C75qWA-jylZPCNrvE4Wm-1">
+          <mxGeometry x="430" y="315" width="260" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="C75qWA-jylZPCNrvE4Wm-13" value="\[p_b = \frac{b}{n}\]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;strokeWidth=1;" vertex="1" parent="C75qWA-jylZPCNrvE4Wm-1">
+          <mxGeometry x="600" y="410" width="80" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="C75qWA-jylZPCNrvE4Wm-14" value="\[p_c = \frac{c}{n}\]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;strokeWidth=1;" vertex="1" parent="C75qWA-jylZPCNrvE4Wm-1">
+          <mxGeometry x="520" y="460" width="80" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="C75qWA-jylZPCNrvE4Wm-15" value="\[p_d = \frac{d}{n}\]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;strokeWidth=1;" vertex="1" parent="C75qWA-jylZPCNrvE4Wm-1">
+          <mxGeometry x="600" y="460" width="80" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="C75qWA-jylZPCNrvE4Wm-16" value="&lt;b&gt;\[Y=0\]&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#F5F5F5,#252525);strokeWidth=1;" vertex="1" parent="C75qWA-jylZPCNrvE4Wm-1">
+          <mxGeometry x="520" y="360" width="80" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="C75qWA-jylZPCNrvE4Wm-17" value="&lt;b&gt;\[Y=1\]&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#F5F5F5,#252525);strokeWidth=1;" vertex="1" parent="C75qWA-jylZPCNrvE4Wm-1">
+          <mxGeometry x="600" y="360" width="80" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="C75qWA-jylZPCNrvE4Wm-18" value="&lt;b&gt;\[X=0\]&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#F5F5F5,#252525);strokeWidth=1;" vertex="1" parent="C75qWA-jylZPCNrvE4Wm-1">
+          <mxGeometry x="440" y="410" width="80" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="C75qWA-jylZPCNrvE4Wm-19" value="&lt;b&gt;\[X=1\]&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#F5F5F5,#252525);strokeWidth=1;" vertex="1" parent="C75qWA-jylZPCNrvE4Wm-1">
+          <mxGeometry x="440" y="460" width="80" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
