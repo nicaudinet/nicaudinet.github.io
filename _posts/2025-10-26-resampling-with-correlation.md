@@ -33,8 +33,8 @@ and a single output:
 - A dataset $\dd$ of size $n$ made up of samples from $\DD$ and where the $X$
 and $Y$ labels have a Pearson correlation of $\rho$
 
-Additionally, since I want to use $\dd$ to train a machine learning models, I
-want it to have the following properties:
+Additionally, since I want to use $\dd$ to train machine learning models, I want
+it to have the following properties:
 
 **Property 1:** Samples in $\dd$ should be
 [independent and identically distributed](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables)
