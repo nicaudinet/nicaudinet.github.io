@@ -41,11 +41,12 @@ I attended [UWC Atlantic College](https://www.uwcatlantic.org/) from 2012 to
 2014.
 
 Topics I am interested in:
+- Bias in NLP systems
+- Mechanistic interpretability
 - Causality and causal inference
-- Machine learning
 - Complex systems
 - Functional programming
 
-I also love to read, code, sing, dance and lift weights.
+I also love to read, code, sing, play bass, dance and lift weights.
 
 [Curriculum Vitae (pdf)]({{ site.baseurl }}public/CV.pdf)
