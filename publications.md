@@ -4,9 +4,10 @@ title: Publications
 order: 3
 ---
 
-# Publications
+# Publications and Talks
 
 ## 2025
+
 [Benchmarking Debiasing Methods for LLM-based Parameter Estimates](https://arxiv.org/abs/2506.09627)  
 Nicolas Audinet de Pieuchon, Adel Daoud, Connor Jerzak, Moa Johansson, Richard Johansson  
 EMNLP 2025  
@@ -37,3 +38,12 @@ Supervied by Fredrik Johansson
 [Real-time stereo vision for collision detection on autonomous UAVs](https://research-information.bris.ac.uk/en/publications/real-time-stereo-vision-for-collision-detection-on-autonomous-uav)  
 Aleksandar Stanoev, Nicolas Audinet, Scott Tancock, Naim Dahnoun  
 IEEE IST 2017
+
+# Talks
+
+## 2026
+
+[Countering Bias in AI Methods for Text
+Data](https://wasp-hs.org/event/winter-conference-2026/) at the 2026 WASP-HS
+Winter Conference
+[ [slides] ]({{ site.baseurl }}public/slides/countering-bias-in-AI-methods.pdf)
