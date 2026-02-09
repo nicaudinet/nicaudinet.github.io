@@ -4,7 +4,7 @@ title: Publications
 order: 3
 ---
 
-# Publications and Talks
+# Publications
 
 ## 2025
 
